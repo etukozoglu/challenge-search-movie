@@ -1,0 +1,61 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="orderForm">
+
+    <div>
+        <br>
+        <h1 style="color: brown; text-align: center">Formulaire Movie Search</h1>
+        <br>
+        <label>Identifiant</label>
+        <input name="identifiant" type="text" formControlName="identifiant">
+    </div>
+    <span *ngIf="submitted && f.info.hasError('isRequired')" class="text-danger my-3">L'un des deux champs 'Identifiant'
+        ou 'Titre' doit être renseigné
+    </span>
+    <br>
+    <br>
+    <div>
+        <label>Titre</label>
+        <input name="titre-order" type="text" formControlName="titre">
+    </div>
+    <span *ngIf="submitted && f.info.hasError('isRequired')" class="text-danger my-3">L'un des deux champs 'Identifiant'
+        ou 'Titre' doit être renseigné
+    </span>
+    <br>
+    <br>
+    <div>
+        <label>Année de sortie</label>
+        <input name="date-order" type="number" formControlName="date">
+    </div>
+    <div *ngIf="submitted && orderForm.controls.date.errors">
+        <span *ngIf="orderForm.controls.date.errors?.['invalidDate']">L'année doit être comprise entre 1900 et
+            {{currentYear}}</span>
+    </div>
+    <br>
+    <br>
+    <div>
+        <label>Type</label>
+        <select name="type" formControlName="type">
+            <option value="serie">série</option>
+            <option value="film">film</option>
+            <option value="episode">episode</option>
+        </select>
+    </div>
+    <div *ngIf="submitted && orderForm.controls.date.errors">
+        <span *ngIf="orderForm.controls.date.errors?.['required']">Le champ date est requis</span>
+    </div>
+    <br>
+    <div>
+        <label>Fiche</label>
+        <select name="fiche" formControlName="fiche">
+            <option value="complete">complète</option>
+            <option value="courte">courte</option>
+        </select>
+    </div>
+    <div *ngIf="submitted && orderForm.controls.date.errors">
+        <span *ngIf="orderForm.controls.date.errors?.['required']">Le champ date est requis</span>
+    </div>
+    <br>
+    <button class="reset" (click)="onReset()">Restaurer</button>
+    <button type="submit">Submit</button>
+
+    <hr />
+</form>
